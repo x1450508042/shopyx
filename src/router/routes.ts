@@ -1,0 +1,172 @@
+
+//拆分路由
+
+//常量路由：任意用户都能访问的路由
+export const constRouter=[
+    {
+        path:'/login',
+        component:()=>import('@/view/login/index.vue'),
+        name:'login',
+        meta:{
+            title:'登录',
+            hidden:true ,//代表标题在菜单中是否隐藏
+            icon:"Platform"
+        }
+    },
+    {
+        path:'/',
+        component:()=>import('@/layout/index.vue'),
+        name:'layout',
+        meta:{
+            // title:'layout',
+            hidden:false,
+            // icon:"Avatar"
+        },
+        redirect:'/home',
+        children:[
+            {
+                path:'/home',
+                component:()=>import('@/view/home/index.vue'),
+                meta:{
+                    title:'首页',
+                    hidden:false,
+                    icon:'HomeFilled'
+                }
+            }
+        ]
+    },
+    {
+        path:'/screen',
+        component:()=>import('@/view/screen/index.vue'),
+        name:'Screen',
+        meta:{
+            hidden:false,
+            title:'数据大屏',
+            icon:'Platform'
+        }
+    },
+    {
+        path:'/404',
+        component:()=>import('@/view/404/index.vue'),
+        name:'404',
+        meta:{
+            title:'404',
+            hidden:true,
+            icon:'HomeFilled'
+        }
+    },
+
+]
+//异步路由：特点用户才能访问
+export const asnycRoute=[
+    {
+        path:'/acl',
+        component:()=>import('@/layout/index.vue'),
+        name:'Acl',
+        redirect:'/acl/user',
+        meta:{
+            title:'权限管理',
+            hidden:false,
+            icon:'Lock'
+        },
+        children:[
+            {
+                path:'/acl/user',
+                component:()=>import('@/view/acl/user/index.vue'),
+                name:'User',
+                meta:{
+                    title:'用户管理',
+                    hidden:false,
+                    icon:'User'
+                }
+            },
+            {
+                path:'/acl/role',
+                component:()=>import('@/view/acl/role/index.vue'),
+                name:'Role',
+                meta:{
+                    title:'角色管理',
+                    hidden:false,
+                    icon:'UserFilled'
+                }
+            },
+            {
+                path:'/acl/permission',
+                component:()=>import('@/view/acl/permission/index.vue'),
+                name:'Permission',
+                meta:{
+                    title:'菜单管理',
+                    hidden:false,
+                    icon:'CirclePlusFilled'
+                }
+            },
+
+        ]
+    },
+    {
+        path:'/product',
+        component:()=>import('@/layout/index.vue'),
+        name:'Product',
+        redirect:'/product/trademark',
+        meta:{
+            hidden:false,
+            title:'商品管理',
+            icon:'Goods'
+        },
+        children:[
+            {
+                path:'/product/trademark',
+                component:()=>import('@/view/product/trademark/index.vue'),
+                name:'Trademark',
+                meta:{
+                    title:'品牌管理',
+                    hidden:false,
+                    icon:'ShoppingCartFull'
+                }
+            },
+            {
+                path:'/product/attr',
+                component:()=>import('@/view/product/attr/index.vue'),
+                name:'Attr',
+                meta:{
+                    title:'属性管理',
+                    hidden:false,
+                    icon:'Memo'
+                }
+            },
+            {
+                path:'/product/spu',
+                component:()=>import('@/view/product/spu/index.vue'),
+                name:'Spu',
+                meta:{
+                    title:'Spu管理',
+                    hidden:false,
+                    icon:'Sunny'
+                }
+            },
+            {
+                path:'/product/sku',
+                component:()=>import('@/view/product/sku/index.vue'),
+                name:'Sku',
+                meta:{
+                    title:'Sku管理',
+                    hidden:false,
+                    icon:'Sunrise'
+                }
+            }
+        ]
+    }
+    ]
+//任意路由
+export const anyRoute=[
+    {
+        path:'/:pathMatch(.*)*',
+        redirect:'/404',
+        name:'Any',
+        meta:{
+            title:'任意路由',
+            hidden:true,
+            icon:'HomeFilled'
+        }
+    }
+]
